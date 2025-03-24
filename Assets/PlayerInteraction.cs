@@ -6,23 +6,22 @@ public class PlayerInteraction : MonoBehaviour
 {
     public GameObject interactableObj = null;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Interactable"))
         {
+            Debug.Log("Player entered Interact Object!");
             interactableObj = collision.gameObject;
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && interactableObj != null)
+        {
+            Debug.Log($"Hey, the player is now interacting with {interactableObj}");
+            interactableObj.GetComponent<InteractionObject>().Interact(); 
+
         }
     }
 

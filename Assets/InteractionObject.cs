@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class InteractionObject : MonoBehaviour
 {
+    public string infoMessage;
+
+    public TMP_Text infoText;
+
     public enum InteractionType
     {
         Nothing,
@@ -13,30 +18,49 @@ public class InteractionObject : MonoBehaviour
     }
 
     [Header("Type of Interactable")]
-    public InteractionType interType;
+    public InteractionType interType; // Creates a drop-down menu based on the InteractionType enum
 
     public void Interact()
     {
+        switch(interType)
+        {
+            case InteractionType.Nothing:
+                Nothing();
+                break;
 
+            case InteractionType.Pickup:
+                Pickup();
+                break;
+
+            case InteractionType.Info:
+                Info();
+                break;
+
+            case InteractionType.Dialogue:
+                Dialogue();
+                break;
+        }
     }
 
     public void Nothing()
     {
-
+        Debug.Log($"Interaction type not defined");
     }
 
     public void Pickup()
     {
-
+        Debug.Log($"Picking up object: {gameObject.name}");
+        gameObject.SetActive(false);
     }
 
     public void Info()
     {
-
+        Debug.Log($"Display info about object: {gameObject.name}");
+        infoText.text = infoMessage;
     }
 
     public void Dialogue()
     {
-
+        Debug.Log($"Have dialogue happen about object: {gameObject.name}");
     }
 }
