@@ -17,8 +17,18 @@ public class InteractionObject : MonoBehaviour
         Dialogue
     }
 
+    private DialogueManager dialogueManagerRef;
+
     [Header("Type of Interactable")]
     public InteractionType interType; // Creates a drop-down menu based on the InteractionType enum
+
+    [Header("Dialogue Text")]
+    [TextArea] public string[] sentences; // Creates a drop-down menu based on the InteractionType enum
+
+    private void Awake()
+    {
+        dialogueManagerRef = GetComponent<DialogueManager>();
+    }
 
     public void Interact()
     {
@@ -61,6 +71,6 @@ public class InteractionObject : MonoBehaviour
 
     public void Dialogue()
     {
-        Debug.Log($"Have dialogue happen about object: {gameObject.name}");
+        dialogueManagerRef.StartDialogue(sentences);
     }
 }
