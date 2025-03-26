@@ -71,6 +71,6 @@ public class InteractionObject : MonoBehaviour
 
     public void Dialogue()
     {
-        dialogueManagerRef.StartDialogue(sentences);
+        dialogueManagerRef.DialogueSystem(sentences);
     }
 }

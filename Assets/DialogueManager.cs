@@ -17,7 +17,7 @@ public class DialogueManager : MonoBehaviour
         dialogueUIObj.SetActive(false);
     }
 
-    public void StartDialogue(string[] sentences)
+    public void DialogueSystem(string[] sentences)
     {
         queueDialogue.Clear();
 
@@ -28,7 +28,14 @@ public class DialogueManager : MonoBehaviour
             queueDialogue.Enqueue(currentString);
         }
 
-        DisplayNextString();
+        if (queueDialogue.Count >= 1)
+        {
+            DisplayNextString();
+        }
+        else
+        {
+            EndDialogue();
+        }
     }
 
     public void DisplayNextString()
@@ -41,7 +48,10 @@ public class DialogueManager : MonoBehaviour
         DisplayNextString();
     }
 
-
+    public void EndDialogue()
+    {
+        dialogueUIObj.SetActive(false);
+    }
 }
 
 // TODO: Make it so when all objects in the queue are gone, the UI gets removed
