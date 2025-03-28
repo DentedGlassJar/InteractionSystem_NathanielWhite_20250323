@@ -72,5 +72,6 @@ public class InteractionObject : MonoBehaviour
     public void Dialogue()
     {
         dialogueManagerRef.DialogueSystem(sentences);
+        Time.timeScale = 0f;
     }
 }

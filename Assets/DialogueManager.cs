@@ -28,19 +28,20 @@ public class DialogueManager : MonoBehaviour
             queueDialogue.Enqueue(currentString);
         }
 
-        if (queueDialogue.Count >= 1)
-        {
-            DisplayNextString();
-        }
-        else
-        {
-            EndDialogue();
-        }
+        DisplayNextString();
     }
 
     public void DisplayNextString()
     {
-        dialogueTextObj.text = queueDialogue.Dequeue();
+        if (queueDialogue.Count != 0)
+        {
+            dialogueTextObj.text = queueDialogue.Dequeue();
+        }
+        else
+        {
+            EndDialogue();
+            Time.timeScale = 1f;
+        }
     }
 
     public void DialogueButton()
@@ -50,6 +51,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        queueDialogue.Clear();
         dialogueUIObj.SetActive(false);
     }
 }
